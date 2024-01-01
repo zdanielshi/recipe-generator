@@ -58,26 +58,38 @@ if 'random_dishes' not in st.session_state:
 
 ## Complexity and language components
 complexity_choices = ["Home cook", "Seasoned cook", "Professional chef"]
-languages = ["English", "French", "Spanish", "German"]
+languages = ["English", "Arabic", "French", "German", "Japanese", "Portuguese", "Spanish", "Simplified Chinese"]
 
-## Title
-st.title('Recipe Generator')
+## Image for side column
+image_html = """
+<div style="text-align:left">
+    <img src="https://images.unsplash.com/photo-1590779033100-9f60a05a013d?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ingredients" style="width:220px;">
+</div>
+"""
 
-## Display About content
-st.sidebar.title("About")
-st.sidebar.write(load_about())
+## Setting up columns for Streamlit app
+col1, col2 = st.columns([1,2], gap = "medium")
 
-## Display dish selection
-st.subheader('Select a Dish')
-selected_dish = st.selectbox("Choose a Dish", st.session_state.random_dishes)
+with col1:
+   ## Display About content
+  st.markdown(image_html, unsafe_allow_html=True)
+  st.markdown(load_about())
 
-## Select complexity level
-selected_complexity = st.selectbox("Select Complexity Level", complexity_choices)
+with col2: 
+  ## Title
+  st.title('Recipe Generator')
 
-## Select language
-selected_language = st.selectbox("Select Language", languages)
+  ## Display dish selection
+  selected_dish = st.selectbox("Choose a dish, a random set of 4 every time", st.session_state.random_dishes)
 
-# Button to generate recipe
-if st.button("Generate Recipe"):
-    recipe = get_recipe(selected_dish, selected_complexity, selected_language)
-    st.write(recipe)
+  ## Select complexity level
+  selected_complexity = st.selectbox("How adventurous of a cooking challenge would you like?", complexity_choices)
+
+  ## Select language
+  selected_language = st.selectbox("Pick a language", languages)
+
+  # Button to generate recipe
+  if st.button("Generate Recipe"):
+      with st.spinner ("Fetching recommendations..."):
+        recipe = get_recipe(selected_dish, selected_complexity, selected_language)
+        st.write(recipe)
