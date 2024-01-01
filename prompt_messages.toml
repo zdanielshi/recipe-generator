@@ -28,4 +28,5 @@ content = "Thank you! Finally, what language do you want me to write the recipe 
 
 [[prompts.recipe_prompt]]
 role = "user"
+
 content = "{language}"
