@@ -1,1 +1,10 @@
-Test
+#### Why?
+This one has a bit more extensive prompt engineering on the back end.
+
+It collects variable inputs in this form, and then injects them into a prompt to OpenAI's API.
+
+The prompt changes based on what variables are shared with it.
+
+[Roadmap](https://southquad.notion.site/Recipe-generator-dc39dacd89e64170920c3937da52abad?pvs=4)
+
+[South Quad LLC](https://southquad.com)
